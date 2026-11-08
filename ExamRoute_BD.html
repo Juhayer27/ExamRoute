@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07110f">
+<meta name="description" content="ExamRoute BD — ঢাকার admission exam venue খুঁজুন, route প্ল্যান করুন, countdown ও checklist নিয়ে প্রস্তুত থাকুন।">
+<title>ExamRoute BD — Your Exam, Your Route</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07110f;--panel:#0d1b17;--c1:#10221b;--c2:#0b1713;--line:rgba(166,255,216,.12);--mint:#39e6a0;--mint2:#a3ffd2;--text:#effcf5;--muted:#9ab4a7;--ink:#052117;--inp:#07140f;--tint:rgba(255,255,255,.05);--glow:rgba(36,173,119,.18);--orange:#ffbd69;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f0f8f3;--panel:#fff;--c1:#fff;--c2:#f2faf5;--line:rgba(10,90,60,.15);--mint:#0b9468;--mint2:#0a7752;--text:#0b2a1f;--muted:#4b695a;--ink:#fff;--inp:#fff;--tint:rgba(10,90,60,.06);--glow:rgba(36,173,119,.16);--orange:#c9741a;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f0f8f3;--panel:#fff;--c1:#fff;--c2:#f2faf5;--line:rgba(10,90,60,.15);--mint:#0b9468;--mint2:#0a7752;--text:#0b2a1f;--muted:#4b695a;--ink:#fff;--inp:#fff;--tint:rgba(10,90,60,.06);--glow:rgba(36,173,119,.16);--orange:#c9741a;color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:calc(88px + env(safe-area-inset-top,0px))}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,var(--glow),transparent 40%),var(--bg);color:var(--text);font:16px/1.55 'Hind Siliguri',system-ui,sans-serif;overflow-x:hidden;transition:background .4s,color .4s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:50}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}button{cursor:pointer}:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.wrap{width:min(1160px,92%);margin:auto}
+#bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--mint),var(--orange));transform-origin:0 50%;transform:scaleX(0);z-index:60}
+.navw{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:11px;font:800 19px Manrope,sans-serif;letter-spacing:-.7px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,#5cf0ae,#0d8b60);display:grid;place-items:center;color:#052217;box-shadow:0 8px 28px #20c88938;transition:transform .5s}.brand:hover .logo{transform:rotate(-12deg) scale(1.08)}.logo svg{width:23px}.brand small{display:block;color:var(--muted);font:500 9px Manrope;letter-spacing:1.6px}
+.navright{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}.navright a.l{padding:7px 11px;border-radius:99px;transition:.25s}.navright a.l:hover,.navright a.l.on{color:var(--mint);background:var(--tint)}
+.ib{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--tint);display:grid;place-items:center;transition:.3s}.ib:hover{border-color:var(--mint);transform:rotate(18deg)}
+.btn{border:0;border-radius:13px;padding:13px 19px;font-weight:700;transition:transform .25s,box-shadow .25s,border-color .25s;display:inline-flex;gap:9px;align-items:center;justify-content:center;position:relative;overflow:hidden}.btn:active{transform:scale(.96)}
+.btn-primary{background:var(--mint);color:var(--ink);box-shadow:0 9px 30px #39e6a02b}.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 35px #39e6a044}.btn-ghost{background:var(--tint);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--mint);transform:translateY(-2px)}
+.rip{position:absolute;border-radius:50%;background:#fff6;transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+.hero{padding:64px 0 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;color:var(--mint);font:700 12px Manrope;letter-spacing:1.4px}.dot{width:7px;height:7px;background:var(--mint);border-radius:50%;animation:pulse 1.8s infinite}
+.hero h1{font:800 clamp(38px,6vw,66px)/1.08 Manrope,'Hind Siliguri',sans-serif;letter-spacing:-2.5px;margin:18px 0}.hero h1 .l{display:block;overflow:hidden}.hero h1 .l i{display:block;font-style:normal;animation:up .9s cubic-bezier(.2,.8,.2,1) both}.hero h1 .l:nth-child(2) i{animation-delay:.12s;color:var(--mint)}.hero h1 .l:nth-child(3) i{animation-delay:.24s}
+.hero p{color:var(--muted);font-size:17px;max-width:560px}.hero-actions{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.stats{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}.stats b{display:block;font:800 28px Manrope,sans-serif;color:var(--mint)}.stats span{font-size:12px;color:var(--muted)}
+.hv{position:relative;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,var(--c1),var(--c2));overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.2);aspect-ratio:4/3.1;animation:float 6s ease-in-out infinite}.hv svg{width:100%;height:100%;display:block}
+.dash{animation:dash 1.1s linear infinite}.ring{fill:none;stroke:var(--mint);transform-box:fill-box;transform-origin:center;animation:ring 2s infinite}
+.fc{position:absolute;background:color-mix(in srgb,var(--panel) 90%,transparent);border:1px solid var(--line);backdrop-filter:blur(10px);border-radius:14px;padding:10px 14px}.fc b{display:block;font:700 12px Manrope,sans-serif}.fc small{color:var(--muted);font-size:10px}.fc1{top:14px;right:14px;animation:bob 4s infinite}.fc2{bottom:14px;left:14px;animation:bob 4s 1s infinite}
+.section{padding:44px 0}.sh{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.kicker{color:var(--mint);font:700 12px Manrope,sans-serif}.section h2{font:800 clamp(25px,4vw,36px) Manrope,'Hind Siliguri',sans-serif;letter-spacing:-1px;margin:6px 0}.sub{color:var(--muted);margin:0}
+.pill{border:1px solid var(--line);color:var(--mint2);border-radius:99px;padding:7px 13px;font-size:12px;white-space:nowrap}
+.searchbox{display:flex;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:10px;margin:22px 0 14px;transition:.3s}.searchbox:focus-within{border-color:var(--mint);box-shadow:0 0 0 4px #39e6a01a}.searchbox input{flex:1;min-width:0;background:transparent;border:0;outline:0;padding:8px 10px}.searchbox select{background:var(--inp);border:1px solid var(--line);border-radius:10px;padding:0 10px;outline:0}.kbd{align-self:center;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 7px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.chip{background:var(--tint);border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:7px 14px;font-size:13px;transition:.25s}.chip:hover{transform:translateY(-2px)}.chip.active{background:var(--mint);border-color:var(--mint);color:var(--ink);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(145deg,var(--c1),var(--c2));border:1px solid var(--line);border-radius:19px;padding:19px;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;animation:appear .55s both;--mx:50%;--my:0%}
+.card::after{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx) var(--my),rgba(57,230,160,.16),transparent);opacity:0;transition:opacity .3s;pointer-events:none}.card:hover{transform:translateY(-6px);border-color:#39e6a066;box-shadow:0 20px 45px #0003}.card:hover::after{opacity:1}
+.ct{display:flex;justify-content:space-between;align-items:center}.symbol{width:43px;height:43px;border-radius:14px;background:#39e6a018;color:var(--mint);display:grid;place-items:center;font-size:21px}.tag{font-size:11px;color:var(--mint2);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.star{background:none;border:0;font-size:21px;line-height:1;padding:4px;color:var(--muted);transition:transform .3s}.star.on{color:var(--orange);animation:pop .45s}.star:hover{transform:scale(1.25) rotate(14deg)}
+.card h3{font-size:19px;margin:14px 0 2px}.en{font:600 11px Manrope,sans-serif;color:var(--muted)}.address{font-size:13px;color:var(--muted);margin:10px 0 12px;min-height:40px}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.meta span{font-size:11px;background:var(--tint);padding:4px 9px;border-radius:7px;color:var(--muted)}
+.ca{display:flex;gap:8px}.ca .btn{font-size:12px;padding:9px 11px;flex:1}.source{font-size:11px;color:var(--muted);margin-top:12px}.source a{color:var(--mint2);text-decoration:underline;text-underline-offset:3px}
+.empty{display:none;text-align:center;padding:45px;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+.planner{background:linear-gradient(135deg,var(--c1),var(--c2));border:1px solid var(--line);border-radius:25px;padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:25px}.planner h3{font:800 22px Manrope,'Hind Siliguri',sans-serif;margin:0 0 6px}.planner p{color:var(--muted);font-size:14px;margin:0}
+.field{margin:12px 0}.field label{display:block;font-size:13px;margin-bottom:6px}.field input,.field select{width:100%;background:var(--inp);border:1px solid var(--line);border-radius:11px;padding:12px;outline:0;transition:.25s}.field input:focus,.field select:focus{border-color:var(--mint);box-shadow:0 0 0 4px #39e6a01a}.row{display:flex;gap:8px}.row input{flex:1;min-width:0}.row .btn{padding:0 14px}
+.planner>div>.btn{width:100%;margin-top:6px}.recent{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.recent .chip{font-size:11px;padding:5px 10px}
+.result{background:var(--inp);border:1px solid var(--line);border-radius:17px;padding:20px;display:flex;flex-direction:column;justify-content:center;gap:6px}.result.pop{animation:appear .5s both}.result h4{margin:6px 0 0;font-size:17px}.result p{font-size:13px;color:var(--muted)}.ra{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.ra .btn{font-size:12px;padding:10px 14px}
+.kit{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.box{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px}.box h3{margin:0 0 4px;font:800 20px Manrope,'Hind Siliguri',sans-serif}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0}.cd div{background:var(--inp);border:1px solid var(--line);border-radius:14px;text-align:center;padding:12px 4px}.cd b{display:block;font:800 clamp(22px,5vw,32px) Manrope,sans-serif;color:var(--mint);font-variant-numeric:tabular-nums}.cd small{font-size:11px;color:var(--muted)}
+.leave{border:1px dashed #39e6a066;border-radius:14px;padding:12px 14px;font-size:14px;margin-bottom:14px;background:#39e6a00d}.leave b{color:var(--mint2)}
+.f3{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px}.f3 label{display:block;font-size:12px;margin-bottom:4px;color:var(--muted)}.f3 input,.f3 select{width:100%;background:var(--inp);border:1px solid var(--line);border-radius:10px;padding:10px;outline:0}
+.prog{display:flex;align-items:center;gap:14px;margin:12px 0}.prog svg{width:64px;height:64px;transform:rotate(-90deg);flex:none}.prog circle{fill:none;stroke-width:6}.prog .bg{stroke:var(--line)}.prog .fg{stroke:var(--mint);stroke-linecap:round;stroke-dasharray:163.4;stroke-dashoffset:163.4;transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1)}.prog b{font:800 22px Manrope,sans-serif}
+.cl{list-style:none;margin:0;padding:0;display:grid;gap:7px}.cl li{display:flex;gap:11px;align-items:center;background:var(--inp);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;cursor:pointer;transition:.25s;user-select:none}.cl li:hover{border-color:#39e6a066;transform:translateX(4px)}.cl .bx{width:20px;height:20px;border-radius:7px;border:2px solid var(--muted);display:grid;place-items:center;font-size:12px;color:transparent;flex:none;transition:.25s}.cl li.ok{color:var(--muted);text-decoration:line-through}.cl li.ok .bx{background:var(--mint);border-color:var(--mint);color:var(--ink);animation:pop .4s}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.step{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;transition:.3s}.step:hover{transform:translateY(-5px);border-color:#39e6a066}.step b{display:block;margin:6px 0 3px}.step p{font-size:13px;color:var(--muted);margin:0}.step .n{font:800 19px Manrope,sans-serif;color:var(--mint)}
+.notice{border:1px solid #d69b4c55;background:#d69b4c14;border-radius:16px;padding:14px 17px;font-size:13px;margin-top:20px}.notice strong{color:var(--orange)}
+.footer{border-top:1px solid var(--line);margin-top:36px;padding:25px 0 35px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,20px);background:var(--mint);color:var(--ink);font-weight:700;padding:10px 17px;border-radius:12px;opacity:0;pointer-events:none;transition:.35s;z-index:70;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+#top{position:fixed;right:16px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:45;opacity:0;transform:translateY(20px);pointer-events:none;transition:.35s;background:var(--mint);color:var(--ink);border-color:var(--mint)}#top.show{opacity:1;transform:none;pointer-events:auto}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+@keyframes pulse{50%{box-shadow:0 0 0 7px #39e6a018,0 0 17px var(--mint)}}@keyframes float{50%{transform:translateY(-9px)}}@keyframes bob{50%{transform:translateY(-6px)}}@keyframes appear{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@keyframes up{from{transform:translateY(110%)}to{transform:none}}@keyframes dash{to{stroke-dashoffset:-34}}@keyframes ring{from{transform:scale(1);opacity:.8}to{transform:scale(3.2);opacity:0}}@keyframes pop{40%{transform:scale(1.5)}}@keyframes rip{to{transform:scale(4);opacity:0}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:44px;gap:28px}.grid{grid-template-columns:repeat(2,1fr)}.planner,.kit{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.navright a.l{display:none}}
+@media(max-width:560px){.hero h1{letter-spacing:-1.5px}.hero p{font-size:15px}.section{padding:32px 0}.sh{display:block}.sh .pill{display:inline-block;margin-top:10px}.searchbox{flex-wrap:wrap}.searchbox input{flex-basis:100%}.kbd{display:none}.searchbox select{height:40px;flex:1}.grid,.steps{grid-template-columns:1fr}.planner{padding:18px}.f3{grid-template-columns:1fr 1fr}.f3>div:first-child{grid-column:1/3}.footer{display:block}.footer div+div{margin-top:8px}.brand small{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="navw"><header class="wrap nav">
+ <a class="brand" href="#top0"><span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19V5h12l4 4v10H4Z"/><path d="M8 15l4-4 3 3 3-5"/></svg></span><span>ExamRoute BD<small>YOUR EXAM. YOUR ROUTE.</small></span></a>
+ <nav class="navright"><a class="l" href="#centers">Exam Centers</a><a class="l" href="#planner">Plan Journey</a><a class="l" href="#kit">Exam Day Kit</a><a class="l" href="#guide">Guide</a><button class="ib" id="theme" aria-label="Theme বদলাও">◐</button></nav>
+</header></div>
+<main id="top0">
+<section class="wrap hero">
+ <div><div class="eyebrow"><span class="dot"></span>DHAKA ADMISSION TRAVEL GUIDE</div>
+ <h1><span class="l"><i>নতুন শহর?</i></span><span class="l"><i>পথ হারানোর</i></span><span class="l"><i>দরকার নেই।</i></span></h1>
+ <p>ঢাকায় admission exam দিতে আসছো? campus খুঁজে নাও, প্রিয় centre save করো, route প্ল্যান করো, আর countdown ও checklist নিয়ে পরীক্ষার দিন নিশ্চিন্তে রওনা হও।</p>
+ <div class="hero-actions"><a class="btn btn-primary" href="#centers">কেন্দ্র খুঁজে দেখি ↗</a><a class="btn btn-ghost" href="#kit">Exam Day Kit খুলি</a></div>
+ <div class="stats"><div><b data-n="0" id="s1">০</b><span>campus listed</span></div><div><b data-n="0" id="s2">০</b><span>এলাকা</span></div><div><b data-n="4">০</b><span>যাতায়াতের ধরন</span></div></div></div>
+ <div class="hv"><svg viewBox="0 0 400 310" aria-hidden="true"><defs><pattern id="g" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0V34" fill="none" stroke="#4c997a" stroke-opacity=".22"/></pattern></defs><rect width="400" height="310" fill="url(#g)"/><path id="rp" d="M62 88C150 20 150 220 250 196S320 214 338 232" fill="none" stroke="var(--mint)" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 9" class="dash"/><circle r="6" fill="var(--orange)"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#rp"/></animateMotion></circle><circle cx="62" cy="88" r="9" fill="var(--mint)"/><circle cx="62" cy="88" r="9" class="ring"/><circle cx="338" cy="232" r="9" fill="var(--orange)"/><circle cx="338" cy="232" r="9" class="ring" style="stroke:var(--orange);animation-delay:1s"/></svg><div class="fc fc1"><b>ঢাকা শহর</b><small>Campus directory</small></div><div class="fc fc2"><b>Find your route</b><small>Starting point → Exam venue</small></div></div>
+</section>
+
+<section class="wrap section rv" id="centers">
+ <div class="sh"><div><div class="kicker">CAMPUS DIRECTORY</div><h2>ঢাকার পরিচিত exam destinations</h2><p class="sub">ঠিকানা, map link আর save করা তালিকা — এক জায়গায়।</p></div><span class="pill" id="count">০টি প্রতিষ্ঠান</span></div>
+ <div class="searchbox"><input id="search" type="search" placeholder="প্রতিষ্ঠান, এলাকা বা নাম লিখে খুঁজুন…" aria-label="Search"><span class="kbd">/</span><select id="area" aria-label="এলাকা"><option value="all">সব এলাকা</option></select></div>
+ <div class="chips" id="chips"><button class="chip active" data-cat="all">সব প্রতিষ্ঠান</button><button class="chip" data-cat="university">বিশ্ববিদ্যালয়</button><button class="chip" data-cat="college">কলেজ</button><button class="chip" data-cat="engineering">Engineering</button><button class="chip" data-cat="medical">Medical</button><button class="chip" data-cat="saved">★ Saved <span id="sc"></span></button></div>
+ <div class="grid" id="cards"></div><div class="empty" id="empty">কিছু পাওয়া গেল না। বানান দেখো, অথবা অন্য filter বেছে নাও।</div>
+ <div class="notice"><strong>খুব জরুরি:</strong> এখানে campus/address directory দেওয়া হয়েছে; এগুলো চলতি বছরের confirmed admission exam centre নয়। কোন ভবন/কক্ষে পরীক্ষা হবে, তা admit card ও official seat plan থেকে মিলিয়ে নেবে।</div>
+</section>
+
+<section class="wrap section rv" id="planner">
+ <div class="sh"><div><div class="kicker">JOURNEY PLANNER</div><h2>কোথা থেকে কোথায় যাবে?</h2><p class="sub">starting point দাও, Google Maps-এ পথ খুলে নাও।</p></div></div>
+ <div class="planner">
+  <div><h3>তোমার route তৈরি করো</h3><p>আগের route-গুলো নিচে থেকে যাবে, আবার দিতে হবে না।</p>
+   <div class="field"><label for="origin">Starting point — কোথা থেকে রওনা হবে?</label><div class="row"><input id="origin" placeholder="যেমন: Gabtoli Bus Terminal, Dhaka"><button class="btn btn-ghost" id="loc" title="আমার লোকেশন">⌖</button></div></div>
+   <div class="field"><label for="destination">Destination — কোন campus?</label><select id="destination"><option value="">প্রতিষ্ঠান নির্বাচন করো</option></select></div>
+   <div class="field"><label for="mode">যাতায়াতের ধরন</label><select id="mode"><option value="transit">Public transport (Maps-এ পাওয়া গেলে)</option><option value="driving">Car / CNG</option><option value="walking">Walking</option><option value="bicycling">Bicycle</option></select></div>
+   <button class="btn btn-primary" id="routeBtn">Route তৈরি করো</button>
+   <div class="recent" id="recent"></div>
+  </div>
+  <div class="result" id="routeResult"><div class="symbol">⌖</div><h4>তোমার যাত্রার প্রস্তুতি</h4><p>Starting point ও destination দিলেই directions-এর link তৈরি হবে। রাস্তা, traffic ও transport option তখনকার availability অনুযায়ী বদলাতে পারে।</p></div>
+ </div>
+</section>
+
+<section class="wrap section rv" id="kit">
+ <div class="sh"><div><div class="kicker">EXAM DAY KIT</div><h2>সময় ও প্রস্তুতি এক জায়গায়</h2><p class="sub">Countdown, রওনা দেওয়ার সময় আর checklist — সব এই ডিভাইসেই save থাকে।</p></div></div>
+ <div class="kit">
+  <div class="box"><h3>Countdown ও leave-by</h3><p class="sub" style="font-size:13px">Admit card-এ reporting time থাকলে সেটাই দাও।</p>
+   <div class="cd" id="cd"><div><b>০</b><small>দিন</small></div><div><b>০</b><small>ঘণ্টা</small></div><div><b>০</b><small>মিনিট</small></div><div><b>০</b><small>সেকেন্ড</small></div></div>
+   <div class="leave" id="leave">পরীক্ষার তারিখ-সময় দিলে এখানে দেখা যাবে কখন রওনা দিতে হবে।</div>
+   <div class="f3"><div><label for="when">পরীক্ষার তারিখ ও সময়</label><input type="datetime-local" id="when"></div><div><label for="trav">যাত্রা (মিনিট)</label><input type="number" id="trav" min="5" max="400" value="60"></div><div><label for="buf">Buffer</label><select id="buf"><option value="30">৩০ মিনিট</option><option value="60" selected>১ ঘণ্টা</option><option value="90">দেড় ঘণ্টা</option></select></div></div>
+   <div class="ra"><button class="btn btn-primary" id="saveExam">Countdown শুরু করো</button><button class="btn btn-ghost" id="clearExam">মুছে ফেলো</button></div></div>
+  <div class="box"><h3>Exam-day checklist</h3><div class="prog"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="26"/><circle class="fg" id="ringfg" cx="32" cy="32" r="26"/></svg><div><b id="pct">০%</b><div class="sub" style="font-size:12px" id="pt">শুরু করো</div></div></div><ul class="cl" id="cl"></ul></div>
+ </div>
+ <p class="sub" style="font-size:12px;margin-top:10px">Leave-by = পরীক্ষার সময় − তোমার দেওয়া যাত্রার সময় − buffer। যাত্রার সময় Google Maps থেকে দেখে নিও।</p>
+</section>
+
+<section class="wrap section rv" id="guide">
+ <div class="sh"><div><div class="kicker">BEFORE YOU LEAVE</div><h2>পরীক্ষার দিনের ছোট্ট survival guide</h2><p class="sub">ঢাকায় প্রথমবার এলে এই কয়েকটা জিনিস মাথায় রেখো।</p></div></div>
+ <div class="steps">
+  <div class="step"><span class="n">১</span><b>Admit card আগে দেখো</b><p>শুধু university name দেখে বের হয়ো না। Building, gate, room বা centre code মিলিয়ে নাও।</p></div>
+  <div class="step"><span class="n">২</span><b>সময় হাতে রাখো</b><p>ঢাকার traffic predictable না। Exam শুরুর অনেক আগে পৌঁছানোর plan করো।</p></div>
+  <div class="step"><span class="n">৩</span><b>ভাড়া আগে জেনে নাও</b><p>বাস/CNG/রিকশায় ওঠার আগে ভাড়া ঠিক করে নিলে পরে ঝামেলা কম হবে।</p></div>
+  <div class="step"><span class="n">৪</span><b>Offline backup রাখো</b><p>Map route screenshot, admit card এবং জরুরি ঠিকানা ফোনে save রাখো।</p></div>
+  <div class="step"><span class="n">৫</span><b>Landmark চিনে রাখো</b><p>কোন gate দিয়ে ঢুকবে আর কাছের পরিচিত landmark কী, জেনে নাও।</p></div>
+  <div class="step"><span class="n">৬</span><b>Official notice-ই শেষ কথা</b><p>Seat plan বা centre বদলালে official notice/admit card-ই follow করবে।</p></div>
+ </div>
+ <div class="notice"><strong>Route accuracy note:</strong> কোনো নির্দিষ্ট বাস নম্বর, ভাড়া বা সময় এখানে বানিয়ে দেখানো হয়নি। Public transport option Maps-এ না এলে local operator বা বাস কাউন্টার থেকে নিশ্চিত হও।</div>
+</section>
+</main>
+<footer class="wrap footer"><div><b style="color:var(--mint2)">ExamRoute BD</b><br>Helping admission candidates navigate Dhaka.</div><div>Independent student utility • HTML, CSS &amp; JavaScript only<br>© 2026 ExamRoute BD</div><div>Part of the <b>EntropicMind</b> ecosystem</div></footer>
+<button class="ib" id="top" aria-label="উপরে যাও">↑</button>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const places=[
+{id:'du',name:'ঢাকা বিশ্ববিদ্যালয়',en:'University of Dhaka',area:'শাহবাগ / পলাশী',address:'Administrative Building, University of Dhaka, Dhaka-1000',cat:['university'],type:'Public University',emoji:'🎓',source:'https://www.du.ac.bd/contactus',sn:'Official DU contact page'},
+{id:'buet',name:'বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয়',en:'BUET',area:'শাহবাগ / পলাশী',address:'BUET, Palashi, Dhaka-1205',cat:['university','engineering'],type:'Engineering University',emoji:'⚙️',source:'https://ictcell.buet.ac.bd/contact',sn:'Official BUET ICT Cell contact'},
+{id:'bup',name:'বাংলাদেশ ইউনিভার্সিটি অব প্রফেশনালস',en:'Bangladesh University of Professionals',area:'মিরপুর',address:'Mirpur Cantonment, Dhaka-1216',cat:['university'],type:'Public University',emoji:'🎓',source:'https://www.bup.edu.bd/contact',sn:'Official BUP contact page'},
+{id:'mist',name:'মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি',en:'MIST',area:'মিরপুর',address:'Mirpur Cantonment, Dhaka-1216',cat:['university','engineering'],type:'Engineering Institute',emoji:'🧭',source:'https://name.mist.ac.bd/campus-view/campus-map',sn:'Official MIST campus map'},
+{id:'sau',name:'শেরেবাংলা কৃষি বিশ্ববিদ্যালয়',en:'Sher-e-Bangla Agricultural University',area:'আগারগাঁও',address:'Sher-e-Bangla Nagar, Dhaka-1207',cat:['university'],type:'Agricultural University',emoji:'🌿',source:'https://sau.edu.bd/public/contact',sn:'Official SAU contact page'},
+{id:'eden',name:'ইডেন মহিলা কলেজ',en:'Eden Mohila College',area:'আজিমপুর / নিউ মার্কেট',address:'Azimpur, Lalbagh, Dhaka-1205',cat:['college'],type:'College',emoji:'🏛️',source:'https://emc.edu.bd/contact-us/',sn:'Official college contact page'},
+{id:'dhaka-college',name:'ঢাকা কলেজ',en:'Dhaka College',area:'আজিমপুর / নিউ মার্কেট',address:'New Market, Dhaka-1205',cat:['college'],type:'College',emoji:'🏛️',source:'https://www.dhakacollege.edu.bd/en/contact',sn:'Official college contact page'},
+{id:'jnu',name:'জগন্নাথ বিশ্ববিদ্যালয়',en:'Jagannath University',area:'পুরান ঢাকা',address:'9-10 Chittaranjan Avenue, Dhaka-1100',cat:['university'],type:'Public University',emoji:'🎓',source:'https://www.jnu.ac.bd',sn:'Official website'},
+{id:'butex',name:'বাংলাদেশ টেক্সটাইল বিশ্ববিদ্যালয়',en:'BUTEX',area:'তেজগাঁও',address:'Tejgaon Industrial Area, Dhaka-1208',cat:['university','engineering'],type:'Textile University',emoji:'🧵',source:'https://www.butex.edu.bd',sn:'Official website'},
+{id:'dmc',name:'ঢাকা মেডিকেল কলেজ',en:'Dhaka Medical College',area:'বকশীবাজার',address:'Secretariat Road, Dhaka-1000',cat:['college','medical'],type:'Medical College',emoji:'🩺',source:'https://dmc.gov.bd',sn:'Official website'},
+{id:'ju',name:'জাহাঙ্গীরনগর বিশ্ববিদ্যালয়',en:'Jahangirnagar University',area:'সাভার',address:'Savar, Dhaka-1342',cat:['university'],type:'Public University',emoji:'🦢',source:'https://www.juniv.edu',sn:'Official website'}
+];
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const store={get(k,d){try{const v=localStorage.getItem('erb_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('erb_'+k,JSON.stringify(v))}catch(e){}}};
+const toBn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]),esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let active='all',saved=store.get('saved',[]);
+const areas=[...new Set(places.map(p=>p.area))];
+areas.forEach(a=>{const o=document.createElement('option');o.textContent=a;$('#area').appendChild(o)});
+places.forEach(p=>{const o=document.createElement('option');o.value=p.id;o.textContent=p.name+' — '+p.area;$('#destination').appendChild(o)});
+$('#s1').dataset.n=places.length;$('#s2').dataset.n=areas.length;
+let tt;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('show'),2400)}
+const mapsUrl=p=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.name+' '+p.address);
+function render(){
+ const q=$('#search').value.trim().toLowerCase(),area=$('#area').value;
+ const list=places.filter(p=>(active==='all'||(active==='saved'?saved.includes(p.id):p.cat.includes(active)))&&(area==='all'||p.area===area)&&(!q||(p.name+' '+p.en+' '+p.area+' '+p.address).toLowerCase().includes(q)));
+ $('#cards').innerHTML=list.map((p,i)=>`<article class="card" data-id="${p.id}" style="animation-delay:${i*50}ms"><div class="ct"><div class="symbol">${p.emoji}</div><span class="tag">${p.type}</span><button class="star ${saved.includes(p.id)?'on':''}" data-act="save" aria-label="Save">${saved.includes(p.id)?'★':'☆'}</button></div><h3>${p.name}</h3><div class="en">${p.en}</div><p class="address">📍 ${p.address}</p><div class="meta"><span>${p.area}</span></div><div class="ca"><a class="btn btn-primary" href="${mapsUrl(p)}" target="_blank" rel="noopener">Open Map ↗</a><button class="btn btn-ghost" data-act="plan">Plan route</button></div><div class="source">Source: <a href="${p.source}" target="_blank" rel="noopener">${p.sn}</a></div></article>`).join('');
+ $('#empty').style.display=list.length?'none':'block';$('#count').textContent=toBn(list.length)+'টি প্রতিষ্ঠান';$('#sc').textContent=saved.length?'('+toBn(saved.length)+')':'';
+}
+$('#cards').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;const id=b.closest('.card').dataset.id;
+ if(b.dataset.act==='save'){const i=saved.indexOf(id);i<0?saved.push(id):saved.splice(i,1);store.set('saved',saved);toast(i<0?'Save করা হয়েছে ★':'Save থেকে সরানো হয়েছে');if(active==='saved'){render()}else{b.classList.toggle('on',i<0);b.textContent=i<0?'★':'☆';$('#sc').textContent=saved.length?'('+toBn(saved.length)+')':''}}
+ else{$('#destination').value=id;$('#planner').scrollIntoView({behavior:'smooth'});setTimeout(()=>$('#origin').focus({preventScroll:true}),600);toast('Destination set হয়েছে। এবার starting point দাও।')}});
+$('#cards').addEventListener('pointermove',e=>{const c=e.target.closest('.card');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')});
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('button[data-cat]');if(!b)return;active=b.dataset.cat;$$('.chip').forEach(x=>x.classList.toggle('active',x===b));render()});
+$('#search').addEventListener('input',render);$('#area').addEventListener('change',render);
+addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)){e.preventDefault();$('#search').focus()}});
+
+/* Planner */
+function dirUrl(o,p,m){const org=/^-?\d+\.\d+,-?\d+\.\d+$/.test(o)?o:o+', Dhaka, Bangladesh';return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(org)+'&destination='+encodeURIComponent(p.name+', '+p.address)+'&travelmode='+m}
+function recent(){const r=store.get('recent',[]);$('#recent').innerHTML=r.map((x,i)=>{const p=places.find(y=>y.id===x.id);return p?`<button class="chip" data-i="${i}">↺ ${esc(x.o)} → ${p.en}</button>`:''}).join('')}
+$('#recent').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;const x=store.get('recent',[])[b.dataset.i];$('#origin').value=x.o;$('#destination').value=x.id;$('#routeBtn').click()});
+$('#loc').addEventListener('click',()=>{if(!navigator.geolocation){toast('এই browser-এ location সাপোর্ট নেই।');return}toast('Location খোঁজা হচ্ছে…');navigator.geolocation.getCurrentPosition(g=>{$('#origin').value=g.coords.latitude.toFixed(5)+','+g.coords.longitude.toFixed(5);toast('তোমার বর্তমান location বসানো হয়েছে।')},()=>toast('Location পাওয়া যায়নি। নিজে লিখে দাও।'),{timeout:9000})});
+$('#routeBtn').addEventListener('click',()=>{const o=$('#origin').value.trim(),p=places.find(x=>x.id===$('#destination').value);
+ if(!o||!p){toast(!o?'Starting point লিখে দাও।':'একটি destination বেছে নাও।');return}
+ const url=dirUrl(o,p,$('#mode').value);let r=store.get('recent',[]).filter(x=>!(x.o===o&&x.id===p.id));r.unshift({o,id:p.id});store.set('recent',r.slice(0,4));recent();
+ const el=$('#routeResult');el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
+ el.innerHTML=`<div class="symbol">✓</div><h4>Route তৈরি — এবার map-এ দেখো</h4><p><b>${esc(o)}</b> থেকে <b>${p.name}</b>। যাত্রার আগে route আবার check করবে।</p><div class="ra"><a class="btn btn-primary" target="_blank" rel="noopener" href="${url}">Open directions ↗</a><button class="btn btn-ghost" id="cp">Copy destination</button></div>`;
+ $('#cp').onclick=()=>navigator.clipboard.writeText(p.name+' — '+p.address).then(()=>toast('Destination copy হয়েছে!')).catch(()=>toast('Copy করা যায়নি।'))});
+
+/* Exam kit: countdown */
+const pad=n=>toBn(String(n).padStart(2,'0'));
+function fmtT(d){let h=d.getHours(),m=d.getMinutes();const ap=h>=12?'PM':'AM';h=h%12||12;return toBn(h)+':'+pad(m)+' '+ap}
+function dayLbl(d){const n=new Date(),k=Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(n.getFullYear(),n.getMonth(),n.getDate()))/864e5);return k===0?'আজ':k===1?'আগামীকাল':toBn(d.getDate())+'/'+toBn(d.getMonth()+1)}
+let last=[];
+function tick(){const t=store.get('exam',null),b=$$('#cd b');
+ if(!t){$('#leave').textContent='পরীক্ষার তারিখ-সময় দিলে এখানে দেখা যাবে কখন রওনা দিতে হবে।';return}
+ const ex=new Date(t.when),diff=ex-Date.now(),lv=new Date(ex-(t.trav+t.buf)*6e4);
+ let v=[0,0,0,0];if(diff>0){const s=Math.floor(diff/1e3);v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60]}
+ v.forEach((x,i)=>{if(last[i]!==x){b[i].textContent=i?pad(x):toBn(x);if(last.length)b[i].animate([{transform:'translateY(-7px)',opacity:.3},{transform:'none',opacity:1}],220)}});last=v;
+ $('#leave').innerHTML=diff<=0?'পরীক্ষার সময় হয়ে গেছে। শুভকামনা! 🍀':diff<(t.trav+t.buf)*6e4?'⚠️ <b>এখনই রওনা দাও!</b> Leave-by সময় পেরিয়ে গেছে।':`রওনা দাও <b>${dayLbl(lv)}, ${fmtT(lv)}</b>-এর মধ্যে — যাত্রা ${toBn(t.trav)} মিনিট + buffer ${toBn(t.buf)} মিনিট।`}
+$('#saveExam').addEventListener('click',()=>{const w=$('#when').value,trav=+$('#trav').value||60;if(!w){toast('পরীক্ষার তারিখ ও সময় দাও।');return}store.set('exam',{when:w,trav,buf:+$('#buf').value});last=[];tick();toast('Countdown শুরু হয়েছে ⏳')});
+$('#clearExam').addEventListener('click',()=>{store.set('exam',null);last=[];$$('#cd b').forEach((b,i)=>b.textContent='০');$('#when').value='';tick();toast('Countdown মুছে ফেলা হয়েছে।')});
+const ex0=store.get('exam',null);if(ex0){$('#when').value=ex0.when;$('#trav').value=ex0.trav;$('#buf').value=ex0.buf}
+tick();setInterval(tick,1000);
+
+/* Checklist */
+const items=['Admit card (প্রিন্ট) ও একটি বাড়তি কপি','Photo ID / registration-এর কাগজ','কলম, পেন্সিল, ইরেজার — নিয়ম অনুযায়ী','পানি ও হালকা খাবার — কেন্দ্রের নিয়ম মেনে','Route screenshot ও offline backup','ভাড়ার টাকা ও জরুরি খুচরা','ফোন charge / power bank','আগের দিন gate ও landmark দেখে রাখা'];
+let done=store.get('done',[]);
+function drawCl(){$('#cl').innerHTML=items.map((t,i)=>`<li class="${done.includes(i)?'ok':''}" data-i="${i}" role="checkbox" aria-checked="${done.includes(i)}" tabindex="0"><span class="bx">✓</span>${t}</li>`).join('');prog()}
+function prog(){const p=done.length/items.length;$('#ringfg').style.strokeDashoffset=163.4*(1-p);$('#pct').textContent=toBn(Math.round(p*100))+'%';$('#pt').textContent=p===1?'সব ready! 🎉':toBn(done.length)+'/'+toBn(items.length)+' সম্পন্ন'}
+function flip(li){const i=+li.dataset.i,k=done.indexOf(i);k<0?done.push(i):done.splice(k,1);store.set('done',done);li.classList.toggle('ok',k<0);li.setAttribute('aria-checked',k<0);prog();if(done.length===items.length)toast('সব প্রস্তুত! পরীক্ষার জন্য শুভকামনা 🎉')}
+$('#cl').addEventListener('click',e=>{const l=e.target.closest('li');if(l)flip(l)});
+$('#cl').addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){const l=e.target.closest('li');if(l){e.preventDefault();flip(l)}}});
+
+/* Theme, scroll, reveal, ripple, counters */
+function theme(t){document.documentElement.dataset.theme=t;document.querySelector('meta[name=theme-color]').content=t==='light'?'#f0f8f3':'#07110f'}
+const sv=store.get('theme',null);if(sv)theme(sv);
+$('#theme').addEventListener('click',()=>{const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'),n=cur==='light'?'dark':'light';theme(n);store.set('theme',n)});
+const links=[...$$('.navright a.l')],secs=links.map(a=>$(a.getAttribute('href')));
+addEventListener('scroll',()=>{const h=document.documentElement,max=h.scrollHeight-innerHeight;$('#bar').style.transform='scaleX('+(max>0?scrollY/max:0)+')';$('#top').classList.toggle('show',scrollY>600);let c=-1;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)c=i});links.forEach((a,i)=>a.classList.toggle('on',i===c))},{passive:true});
+$('#top').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08});$$('.rv').forEach(e=>io.observe(e))}else $$('.rv').forEach(e=>e.classList.add('in'));
+document.addEventListener('pointerdown',e=>{const b=e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect(),s=document.createElement('span'),d=Math.max(r.width,r.height);s.className='rip';s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;b.appendChild(s);setTimeout(()=>s.remove(),650)});
+$$('.stats b').forEach(el=>{const n=+el.dataset.n,t0=performance.now()+500;(function f(t){const k=Math.min(Math.max((t-t0)/900,0),1);el.textContent=toBn(Math.round(n*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(f)})(t0)});
+recent();render();
+</script>
+</body>
+</html>
